@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"math"
+	"runtime"
+	"time"
 )
 
 func main() {
@@ -25,6 +27,26 @@ func main() {
 		pow(3, 3, 20),
 	)
 
+	fmt.Print("Go runs on ")
+	switch os := runtime.GOOS; os {
+	case "darwin":
+		fmt.Println("OS X.")
+	case "linux":
+		fmt.Println("Linux.")
+	default:
+		fmt.Printf("%s. \n", os)
+	}
+
+	fmt.Print("When's Saturday?")
+	today := time.Now().Weekday()
+	switch time.Saturday {
+	case today + 1:
+		fmt.Println("Today.")
+	case today + 2:
+		fmt.Println("Tomorrow.")
+	default:
+		fmt.Println("Too far away.")
+	}
 }
 func sqrt(x float64) string {
 	if x < 0 {
