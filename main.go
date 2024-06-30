@@ -9,4 +9,11 @@ func main() {
 		sum += i
 	}
 	fmt.Println(sum)
+
+	// for文セミコロン省略
+	num := 1
+	for num < 1000 {
+		num += sum
+	}
+	fmt.Println(num)
 }
