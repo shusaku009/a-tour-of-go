@@ -57,7 +57,19 @@ func main() {
 	default:
 		fmt.Println("Good evening.")
 	}
+
+	defer fmt.Println("world")
+	fmt.Println("hello")
+
+	fmt.Println("counting")
+
+	for i := 0; i < 10; i++ {
+		defer fmt.Println(i)
+	}
+
+	fmt.Println("done")
 }
+
 func sqrt(x float64) string {
 	if x < 0 {
 		return sqrt(-x) + "i"
