@@ -1,15 +1,33 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 type IPAddr [4]byte
 
+func (ip *IPAddr) String() string {
+	return fmt.Sprintf("%d.%d.%d.%d", ip[0], ip[1], ip[2], ip[3])
+}
+
+func print(verb rune, arg interface{}) {
+	switch verb {
+	case 'v':
+		switch v := arg.(type) {
+		case fmt.Stringer:
+			fmt.Printf("%v: %v\n", reflect.TypeOf(arg).Kind(), v.String())
+		default:
+			fmt.Printf("%v: %v\n", reflect.TypeOf(arg).Kind(), v)
+		}
+	}
+}
+
 func main() {
-	hosts := map[string]IPAddr{
-		"loopback":  {127, 0, 0, 1},
-		"googleDNS": {8, 8, 8, 8},
+	ip := []IPAddr{
+		{127, 0, 0, 1},
+		{198, 0, 0, 1},
 	}
-	for name, ip := range hosts {
-		fmt.Printf("%v: %v\n", name, ip)
-	}
+	print('v', ip[0])
+	print('v', &ip[1])
 }
